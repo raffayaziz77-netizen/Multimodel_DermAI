@@ -1,16 +1,27 @@
-# React + Vite
+# DermAI (Vite + React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Prerequisites
 
-Currently, two official plugins are available:
+- Node.js: `^20.19.0 || >=22.12.0` (required by Vite 7)
+- npm
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Run locally
 
-## React Compiler
+```bash
+npm ci
+cp .env.example .env # optional
+npm run dev
+```
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## Backend API
 
-## Expanding the ESLint configuration
+The frontend posts a `multipart/form-data` request to:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `${VITE_API_BASE_URL}/predict` (defaults to `http://localhost:8000/predict`)
+
+Set `VITE_API_BASE_URL` in `.env` if your backend is on a different host/port.
+
+## Common issues
+
+- `sh: vite: command not found`: dependencies weren’t installed; run `npm ci`.
+- `ENOTFOUND registry.npmjs.org`: npm can’t reach the package registry (DNS/network/proxy issue).

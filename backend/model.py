@@ -21,7 +21,9 @@ class MultiModalNet(nn.Module):
 
         self.classifier = nn.Sequential(
             nn.Linear(512 + 128, 256),
+            nn.LayerNorm(256),
             nn.ReLU(),
+            nn.Dropout(p=0.2),
             nn.Linear(256, num_classes)
         )
 
