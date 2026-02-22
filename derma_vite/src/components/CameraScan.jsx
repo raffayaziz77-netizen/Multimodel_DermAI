@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import Layout from "./Layout"
 
-export default function CameraScan({ setImage, setStep }) {
+export default function CameraScan({ setImageFile, setImagePreview, setStep }) {
   const videoRef = useRef(null)
   const canvasRef = useRef(null)
 
@@ -21,7 +21,8 @@ export default function CameraScan({ setImage, setStep }) {
 
     canvas.toBlob((blob) => {
       const file = new File([blob], "camera.png", { type: "image/png" })
-      setImage(file)             // ✅ real File
+      setImageFile(file) // API
+      setImagePreview(URL.createObjectURL(file)) // UI preview             
       setStep("questions")
     })
   }
