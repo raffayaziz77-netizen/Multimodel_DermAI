@@ -5,14 +5,17 @@ export default function Result({ image, answers, result, setStep }) {
     <Layout>
       <h2>Diagnosis Result</h2>
 
-      {image && (
+      {image ? (
         <img
           src={image}
           alt="Skin"
           width="300"
-          style={{ marginBottom: "20px" }}
+          style={{ marginBottom: "20px", borderRadius: "12px" }}
+          onError={(e) => {
+            e.target.style.display = "none"
+          }}
         />
-      )}
+      ) : null}
 
       <h3>Diagnosis</h3>
       <p>Possible condition: {result.prediction}</p>
@@ -26,8 +29,8 @@ export default function Result({ image, answers, result, setStep }) {
         <li>SPF 50 Sunscreen</li>
       </ul>
 
-      <h3>User Answers</h3>
-      <pre>{JSON.stringify(answers, null, 2)}</pre>
+      {/* <h3>User Answers</h3>
+      <pre>{JSON.stringify(answers, null, 2)}</pre> */}
 
       <div style={{ marginTop: "40px" }}>
         <button onClick={() => setStep("landing")}>

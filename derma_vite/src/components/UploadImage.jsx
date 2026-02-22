@@ -1,10 +1,11 @@
 import Layout from "./Layout"
 
-export default function UploadImage({ setImage, setStep }) {
+export default function UploadImage({ setImageFile, setImagePreview, setStep }) {
   const handleUpload = (e) => {
     const file = e.target.files[0]
     if (file) {
-      setImage(file)
+      setImageFile(file) // API
+      setImagePreview(URL.createObjectURL(file)) // UI preview
       setStep("questions")
     }
   }
