@@ -18,7 +18,8 @@ const pageVariants = {
 
 function App() {
   const [step, setStep] = useState("landing")
-  const [image, setImage] = useState(null)
+  const [imageFile, setImageFile] = useState(null)
+  const [imagePreview, setImagePreview] = useState(null)
   const [answers, setAnswers] = useState({})
   const [result, setResult] = useState(null)
 
@@ -37,11 +38,19 @@ function App() {
         {step === "landing" && <Landing setStep={setStep} />}
 
         {step === "upload" && (
-          <UploadImage setImage={setImage} setStep={setStep} />
+          <UploadImage 
+            setImageFile={setImageFile} 
+            setImagePreview={setImagePreview} 
+            setStep={setStep} 
+          />
         )}
 
         {step === "camera" && (
-          <CameraScan setImage={setImage} setStep={setStep} />
+          <CameraScan 
+            setImageFile={setImageFile} 
+            setImagePreview={setImagePreview} 
+            setStep={setStep} 
+          />
         )}
 
         {step === "questions" && (
@@ -50,7 +59,7 @@ function App() {
             setAnswers={setAnswers}
             setStep={async () => {
               setStep("analyzing")
-              const res = await predictSkin(image, answers)
+              const res = await predictSkin(imageFile, answers)
               setResult(res)
               setStep("result")
             }}
@@ -64,7 +73,7 @@ function App() {
 
         {step === "result" && (
           <Result
-            image={image}
+            image={imagePreview}
             answers={answers}
             result={result}
             setStep={setStep}
